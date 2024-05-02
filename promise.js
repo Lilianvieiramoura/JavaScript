@@ -18,6 +18,22 @@ const rejectedPromise = () =>
     }, 1000);
   });
 
+
+const randomPromise = () =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const randomNumber = generateRandomNumber();
+      
+      if (randomNumber % 2 === 0) {
+        resolve(randomNumber);
+      } else {
+        reject(
+          new Error(`O número ${randomNumber} é inválido. Somente números pares são válidos.`
+        ));
+      }
+    }, 1000)
+  });
+
 resolvedPromise().then((response) => {
     console.log(`resolvedPromise: O número gerado é ${response}`);
 });
@@ -28,4 +44,12 @@ rejectedPromise()
   })
   .catch((error) => {
     console.log(`rejectedPromise: ${error.message}`);
+  });
+
+randomPromise()
+  .then((response) => {
+    console.log(`Promise resolvida. O número gerado é ${response}`);
   })
+  .catch((error) => {
+    console.log(`Promise rejeitada. ${error.message}`);
+  });
