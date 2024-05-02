@@ -34,9 +34,12 @@ const randomPromise = () =>
     }, 1000)
   });
 
-resolvedPromise().then((response) => {
+resolvedPromise()
+  .then((response) => {
     console.log(`resolvedPromise: O número gerado é ${response}`);
-});
+  })
+  .finally(() => 
+    console.log('Fim da execução da primeira promise.'));
 
 rejectedPromise()
   .then((response) => {
@@ -44,7 +47,9 @@ rejectedPromise()
   })
   .catch((error) => {
     console.log(`rejectedPromise: ${error.message}`);
-  });
+  })
+  .finally(() => 
+    console.log('Fim da execução da segunda promise.'));
 
 randomPromise()
   .then((response) => {
@@ -52,4 +57,6 @@ randomPromise()
   })
   .catch((error) => {
     console.log(`Promise rejeitada. ${error.message}`);
-  });
+  })
+  .finally(() => 
+    console.log('Fim da execução da terceira promise.'));
